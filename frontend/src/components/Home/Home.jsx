@@ -1,4 +1,4 @@
-import IMG from "../../assets/img.png";
+import IMG from "/screenshots/screenshot.jpeg";
 import {
   Box,
   Typography,

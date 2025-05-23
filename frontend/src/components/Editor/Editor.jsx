@@ -278,7 +278,7 @@ console.log(\`Current time: \${currentTime}\`);`,
             <Typography
               variant="body2"
               sx={{
-                color: "text.secondary",
+                color: "white",
                 fontFamily: "Poppins, sans-serif",
                 mb: 3,
                 fontSize: "0.875rem",

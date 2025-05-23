@@ -9,7 +9,7 @@ import Editor from "./components/Editor/Editor";
 import Navbar from "./components/Navbar/Navbar";
 import Home from "./components/Home/Home";
 import { CustomContext } from "./utils/customContext";
-import { Box, Container, ThemeProvider } from "@mui/material";
+import { Box, ThemeProvider } from "@mui/material";
 import {
   orangeTheme,
   blueTheme,
@@ -19,15 +19,27 @@ import {
 } from "./utils/cutomTheme";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
+import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
+import NotFound from "./pages/NotFound/NotFound";
 
 function AppContent() {
   const location = useLocation();
 
-  const routesWithoutNavbar = ["/editor", "/login", "/register"];
-
+  // Approach 1: Use whitelist (recommended)
   const routesWithNavbar = ["/"];
+  const shouldShowNavbar = routesWithNavbar.includes(location.pathname);
 
-  const shouldShowNavbar = !routesWithoutNavbar.includes(location.pathname);
+  // Approach 2: Check for valid routes (alternative)
+  // const validRoutes = ["/", "/editor", "/login", "/register", "/forgot-password"];
+  // const isValidRoute = validRoutes.includes(location.pathname);
+  // const routesWithNavbar = ["/"];
+  // const shouldShowNavbar = isValidRoute && routesWithNavbar.includes(location.pathname);
+
+  // Approach 3: Blacklist with 404 detection (another alternative)
+  // const routesWithoutNavbar = ["/editor", "/login", "/register", "/forgot-password"];
+  // const validRoutes = ["/", "/editor", "/login", "/register", "/forgot-password"];
+  // const is404 = !validRoutes.includes(location.pathname);
+  // const shouldShowNavbar = !routesWithoutNavbar.includes(location.pathname) && !is404;
 
   return (
     <Box
@@ -39,10 +51,13 @@ function AppContent() {
       {shouldShowNavbar && <Navbar />}
 
       <Routes>
-        <Route exact path="/" element={<Home />} />
-        <Route exact path="/editor" element={<Editor />} />
-        <Route exact path="/login" element={<Login />} />
-        <Route exact path="/register" element={<Register />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/editor" element={<Editor />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        {/* The catch-all route should be last */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Box>
   );

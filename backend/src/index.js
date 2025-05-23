@@ -1,16 +1,24 @@
-const express = require("express");
+import express from "express";
+import cors from "cors";
+import v1route from "./routes/index.js";
+import { PORT } from "./config/server-config.js";
+import { connectDB } from "./config/db.js";
+import dotenv from "dotenv";
+
+dotenv.config();
+
 const server = express();
-const cors = require("cors");
-const v1route = require("./routes/index");
-const { PORT } = require("./config/server-config");
 
 server.use(express.json());
+server.use(express.urlencoded({ extended: true }));
 server.use(cors());
+
 server.use("/api", v1route);
 
-const startAndcreateServer = async () => {
+const startAndCreateServer = async () => {
   server.listen(PORT || 3300, () => {
-    console.log(`Server started at port ${PORT || 3300}`);
+    console.log(`🚀 Server started at port ${PORT || 3300}`);
   });
 };
-startAndcreateServer();
+
+startAndCreateServer();

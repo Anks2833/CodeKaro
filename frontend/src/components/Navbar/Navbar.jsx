@@ -52,8 +52,7 @@ function Navbar() {
   };
 
   const handleSignup = () => {
-    // Add your signup logic here
-    navigate("/signup");
+    navigate("/register");
     setMobileMenuOpen(false);
   };
 
@@ -93,9 +92,9 @@ function Navbar() {
                 alignItems: "center",
                 cursor: "pointer",
                 transition: "all 0.3s ease",
-                "&:hover": {
-                  transform: "translateY(-2px)",
-                },
+                // "&:hover": {
+                //   transform: "translateY(-2px)",
+                // },
               }}
               onClick={() => navigate("/")}
             >
