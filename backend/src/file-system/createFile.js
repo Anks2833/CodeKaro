@@ -1,7 +1,7 @@
-const fs = require("fs/promises");
-const { join } = require("path");
-const runCode = require("../services/code-runner");
-const deletingTempFiles = require("./deleteFile");
+import fs from "fs/promises";
+import { join } from "path";
+import runCode from "../services/code-runner.js";
+import deletingTempFiles from "./deleteFile.js";
 
 const extensions = {
   cpp: "cpp",
@@ -18,7 +18,7 @@ async function createFiles(json_msg) {
     await fs.writeFile(
       join(
         process.cwd(),
-        `/temp/${json_msg.filename}.${extensions[json_msg.lang]}`
+        `temp/${json_msg.filename}.${extensions[json_msg.lang]}`
       ),
       json_msg.src
     );
@@ -32,4 +32,4 @@ async function createFiles(json_msg) {
   }
 }
 
-module.exports = createFiles;
+export default createFiles;

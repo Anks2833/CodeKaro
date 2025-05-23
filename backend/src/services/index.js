@@ -1,3 +1,3 @@
-module.exports = {
-  compileService: require("./compileService"),
-};
+import CompileService from "./compileService.js";
+
+export { CompileService };

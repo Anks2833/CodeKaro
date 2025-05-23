@@ -1,21 +1,23 @@
-const { join } = require("path");
-const fs = require("fs/promises");
+import { join } from "path";
+import fs from "fs/promises";
+
 async function deletingTempFiles() {
-  // now we have to delete the files inside the temp folder
   try {
-    const files = await fs.readdir(join(process.cwd(), `/temp/`));
-    for (let i in files) {
-      fs.unlink(join(process.cwd(), `/temp/${files[i]}`), (err) => {
-        if (err) {
-          console.log(err);
-        } else {
-          console.log("DELETED files -> " + files[i]);
-        }
-      });
+    const tempDir = join(process.cwd(), "temp");
+    const files = await fs.readdir(tempDir);
+
+    for (const file of files) {
+      try {
+        await fs.unlink(join(tempDir, file));
+        console.log("DELETED file ->", file);
+      } catch (err) {
+        console.error("Failed to delete:", file, err);
+      }
     }
   } catch (error) {
-    console.log(error);
+    console.error("Error reading temp directory:", error);
     throw error;
   }
 }
-module.exports = deletingTempFiles;
+
+export default deletingTempFiles;

@@ -1,10 +1,12 @@
-const express = require("express");
-const { compileController } = require("../../controller/index");
+import express from "express";
+import { compileController } from "../../controller/index.js";
+
 const router = express.Router();
 
 router.get("/", (req, res) => {
-  res.status(200).json("successfully made the get request");
+  res.status(200).json("Successfully made the GET request");
 });
+
 router.post("/submit", compileController.runCode);
 
-module.exports = router;
+export default router;

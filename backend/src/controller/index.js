@@ -1,3 +1,3 @@
-module.exports = {
-  compileController: require("./compile-controller"),
-};
+import compileController from "./compile-controller.js";
+
+export { compileController };

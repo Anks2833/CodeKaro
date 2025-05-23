@@ -1,48 +1,48 @@
-const { join } = require("path");
+import { join } from "path";
 
-const commandMap = (filename, language) => {
+export const commandMap = (filename, language) => {
+  const tempPath = (ext) => join(process.cwd(), `/temp/${filename}.${ext}`);
+
   switch (language) {
     case "java":
       return {
         exCommand: "java",
-        exArgs: [join(process.cwd(), `/temp/${filename}.java`)],
+        exArgs: [tempPath("java")],
       };
+
     case "cpp":
       return {
         comCommand: "g++",
-        comArgs: [
-          join(process.cwd(), `/temp/${filename}.cpp`),
-          "-o",
-          join(process.cwd(), `/temp/${filename}.out`),
-        ],
-        exCommand: join(process.cwd(), `/temp/${filename}.out`),
+        comArgs: [tempPath("cpp"), "-o", tempPath("out")],
+        exCommand: tempPath("out"),
       };
+
     case "py":
       return {
         exCommand: "python3",
-        exArgs: [join(process.cwd(), `/temp/${filename}.py`)],
+        exArgs: [tempPath("py")],
       };
+
     case "c":
       return {
         comCommand: "gcc",
-        comArgs: [
-          join(process.cwd(), `/temp/${filename}.c`),
-          "-o",
-          join(process.cwd(), `/temp/${filename}.out`),
-        ],
-        exCommand: join(process.cwd(), `/temp/${filename}.out`),
+        comArgs: [tempPath("c"), "-o", tempPath("out")],
+        exCommand: tempPath("out"),
       };
+
     case "js":
       return {
         exCommand: "node",
-        exArgs: [join(process.cwd(), `/temp/${filename}.js`)],
+        exArgs: [tempPath("js")],
       };
+
     case "go":
       return {
         exCommand: "go",
-        exArgs: ["run", join(process.cwd(), `/temp/${filename}.go`)],
+        exArgs: ["run", tempPath("go")],
       };
+
+    default:
+      throw new Error(`Unsupported language: ${language}`);
   }
 };
-
-module.exports = { commandMap };

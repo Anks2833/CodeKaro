@@ -1,7 +1,9 @@
-const random = require("../utils/random");
-const createFiles = require("../file-system/createFile");
-class compileService {
+import random from "../utils/random.js";
+import createFiles from "../file-system/createFile.js";
+
+class CompileService {
   constructor() {}
+
   async runCode(req) {
     try {
       const data = {
@@ -10,26 +12,25 @@ class compileService {
         lang: req.body.lang,
         filename: "Test" + random(10),
       };
+
       console.log(req.body.src);
+
       if (req.body.src && req.body.lang) {
-        if (data) {
-          const ans = await createFiles(data);
-          console.log("Output --> " + JSON.stringify(ans));
-          return ans;
-        }
+        const ans = await createFiles(data);
+        console.log("Output --> " + JSON.stringify(ans));
+        return ans;
       } else {
         console.log("Invalid Request has been made");
-        let result = {
+        return {
           output: "Invalid Request",
           status: "Invalid Request",
         };
-        return result;
       }
     } catch (error) {
-      console.log(error);
+      console.error("Error in CompileService.runCode:", error);
       throw error;
     }
   }
 }
 
-module.exports = compileService;
+export default CompileService;

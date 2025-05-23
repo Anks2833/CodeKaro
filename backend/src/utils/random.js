@@ -1,7 +1,7 @@
-const crypto = require("crypto");
+import crypto from "crypto";
 
 function random(size) {
   return crypto.randomBytes(size).toString("hex");
 }
 
-module.exports = random;
+export default random;

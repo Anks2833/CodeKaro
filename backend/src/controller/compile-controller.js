@@ -1,7 +1,8 @@
-const { compileService } = require("../services/index.js");
-class compileController {
+import { CompileService } from "../services/index.js";
+
+class CompileController {
   constructor() {
-    this.compileService = new compileService();
+    this.compileService = new CompileService();
   }
 
   runCode = async (req, res) => {
@@ -14,9 +15,10 @@ class compileController {
         success: true,
       });
     } catch (error) {
-      console.log(error);
-      return res.status(500).json(error);
+      console.error(error);
+      return res.status(500).json({ error: error.message || "Internal Server Error" });
     }
   };
 }
-module.exports = new compileController();
+
+export default new CompileController();

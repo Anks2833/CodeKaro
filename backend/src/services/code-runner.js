@@ -1,6 +1,6 @@
-const deletingTempFiles = require("../file-system/deleteFile");
-const { commandMap } = require("./commands");
-const { spawn } = require("child_process");
+import deletingTempFiles from "../file-system/deleteFile.js";
+import { commandMap } from "./commands.js";
+import { spawn } from "child_process";
 
 const extensions = {
   cpp: "cpp",
@@ -14,38 +14,41 @@ const extensions = {
 async function runCode(json_msg) {
   try {
     const timeout = 20;
+
     const { comCommand, comArgs, exCommand, exArgs } = commandMap(
       json_msg.filename,
       extensions[json_msg.lang]
     );
+
+    // Compilation step
     if (comCommand) {
       await new Promise((resolve, reject) => {
         const compiledCode = spawn(comCommand, comArgs || []);
+
         compiledCode.stderr.on("data", (error) => {
           reject({ status: "Failed", error: error.toString() });
         });
+
         compiledCode.on("exit", () => {
           resolve();
         });
       });
     }
+
+    // Execution step
     const result = await new Promise((resolve, reject) => {
       const exCode = spawn(exCommand, exArgs || []);
-      let output = "",
-        error = "";
+      let output = "";
+      let error = "";
 
-      const timer = setTimeout(async () => {
+      const timer = setTimeout(() => {
         exCode.kill("SIGHUP");
-
-        console.log("timeout");
-
         reject({
           status: "Runtime Error",
-          error: `Timed Out. Your code took too long to execute, over ${timeout} seconds. Make sure you are sending input as payload if your code expects an input.`,
+          error: `Timed Out. Your code took too long to execute, over ${timeout} seconds.`,
         });
-        console.log("rejected");
       }, timeout * 1000);
-      console.log(json_msg.stdin.toString());
+
       exCode.stdin.write(json_msg.stdin.toString());
       exCode.stdin.end();
 
@@ -61,27 +64,21 @@ async function runCode(json_msg) {
         error += data.toString();
       });
 
-      exCode.on("exit", (err) => {
-        console.log("exit");
+      exCode.on("exit", () => {
         clearTimeout(timer);
         resolve({ output, error });
       });
     });
+
     await deletingTempFiles();
     return result;
   } catch (error) {
-    console.log(error);
-    if (error.status === "Failed") {
-      console.log(error);
-      await deletingTempFiles();
-      return error;
-    } else if (error.status === "Runtime Error") {
-      console.log("Error ---------->" + error);
-      console.log(error);
-      await deletingTempFiles();
-      return error;
-    }
+    console.error("runCode error:", error);
     await deletingTempFiles();
+    return error.status
+      ? error
+      : { status: "Unknown Error", error: error.toString() };
   }
 }
-module.exports = runCode;
+
+export default runCode;
