@@ -1,5 +1,5 @@
 {
-  "name": "CodeBox-Api",
+  "name": "CodeKaro-Api",
   "version": "1.0.0",
   "description": "A scalable Node.js-powered platform for executing code with ease.",
   "main": "index.js",

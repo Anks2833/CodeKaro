@@ -1,6 +1,6 @@
-Deployed API - "https://github.com/kushagra-goyal-14/CodeBox-API"
+Deployed API - "https://github.com/kushagra-goyal-14/CodeKaro-API"
 
-Scaled API - "https://github.com/kushagra-goyal-14/CodeBox"
+Scaled API - "https://github.com/kushagra-goyal-14/CodeKaro"
 
 The compiler might take a while at first as it is hosted on render's free serverless architecture.
 
@@ -8,8 +8,8 @@ The compiler might take a while at first as it is hosted on render's free server
 
 ### ScreenShots
 
-![Codebox](./screenshots/img2.png)
+![CodeKaro](./screenshots/img2.png)
 
 <br>
 
-![Codebox](./screenshots/img.png)
+![CodeKaro](./screenshots/img.png)

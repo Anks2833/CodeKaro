@@ -5,32 +5,23 @@ import {
   Box,
   Container,
   Typography,
-  Chip,
-  Stack,
   useMediaQuery,
   useTheme,
   IconButton,
-  Menu,
-  MenuItem,
   Drawer,
   List,
   ListItem,
   ListItemButton,
   ListItemText,
+  Stack,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { CustomContext } from "../../utils/customContext";
 import { useContext, useState } from "react";
-import CircleIcon from "@mui/icons-material/Circle";
 import MenuIcon from "@mui/icons-material/Menu";
-import PaletteIcon from "@mui/icons-material/Palette";
 import CodeIcon from "@mui/icons-material/Code";
-import {
-  blueTheme,
-  orangeTheme,
-  yellowTheme,
-  greenTheme,
-} from "../../utils/cutomTheme";
+import LoginIcon from "@mui/icons-material/Login";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -39,32 +30,11 @@ function Navbar() {
   const isMobile = useMediaQuery(muiTheme.breakpoints.down("md"));
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [themeMenuAnchor, setThemeMenuAnchor] = useState(null);
-
-  const themes = [
-    { theme: orangeTheme, color: "#FF7722", name: "Orange" },
-    { theme: greenTheme, color: "rgb(144, 214, 208)", name: "Green" },
-    { theme: blueTheme, color: "#2196F3", name: "Blue" },
-    { theme: yellowTheme, color: "#FFBA09", name: "Yellow" },
-  ];
 
   const navigationItems = [
     { label: "Home", path: "/" },
     { label: "Editor", path: "/editor" },
   ];
-
-  const handleThemeMenuOpen = (event) => {
-    setThemeMenuAnchor(event.currentTarget);
-  };
-
-  const handleThemeMenuClose = () => {
-    setThemeMenuAnchor(null);
-  };
-
-  const handleThemeChange = (selectedTheme) => {
-    setTheme(selectedTheme);
-    handleThemeMenuClose();
-  };
 
   const handleMobileMenuToggle = () => {
     setMobileMenuOpen(!mobileMenuOpen);
@@ -75,10 +45,22 @@ function Navbar() {
     setMobileMenuOpen(false);
   };
 
+  const handleLogin = () => {
+    // Add your login logic here
+    navigate("/login");
+    setMobileMenuOpen(false);
+  };
+
+  const handleSignup = () => {
+    // Add your signup logic here
+    navigate("/signup");
+    setMobileMenuOpen(false);
+  };
+
   return (
     <>
       <AppBar
-        position="static"
+        position="fixed"
         elevation={0}
         sx={{
           background:
@@ -101,7 +83,7 @@ function Navbar() {
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
-              minHeight: "64px",
+              height: "60px",
             }}
           >
             {/* Logo Section */}
@@ -131,7 +113,7 @@ function Navbar() {
               >
                 <CodeIcon sx={{ color: "white", fontSize: "1.5rem" }} />
               </Box>
-              <Typography
+              {/* <Typography
                 variant="h5"
                 sx={{
                   fontWeight: 800,
@@ -144,11 +126,11 @@ function Navbar() {
                 }}
               >
                 CodeKaro
-              </Typography>
+              </Typography> */}
             </Box>
 
             {/* Desktop Navigation */}
-            {!isMobile && (
+            {/* {!isMobile && (
               <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
                 {navigationItems.map((item) => (
                   <Button
@@ -161,7 +143,7 @@ function Navbar() {
                       color: "light.main",
                       fontWeight: 600,
                       fontSize: "0.95rem",
-                      borderRadius: "25px",
+                      borderRadius: "12px",
                       textTransform: "none",
                       position: "relative",
                       overflow: "hidden",
@@ -179,7 +161,7 @@ function Navbar() {
                       },
                       "&:hover": {
                         background: "rgba(255,255,255,0.1)",
-                        transform: "translateY(-2px)",
+                        // transform: "translateY(-2px)",
                         boxShadow: "0 8px 25px rgba(0,0,0,0.15)",
                         "&::before": {
                           left: "100%",
@@ -191,78 +173,63 @@ function Navbar() {
                   </Button>
                 ))}
               </Box>
-            )}
+            )} */}
 
-            {/* Theme Switcher & Mobile Menu */}
+            {/* Auth Buttons & Mobile Menu */}
             <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-              {/* Desktop Theme Switcher */}
+              {/* Desktop Auth Buttons */}
               {!isMobile && (
-                <Box
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    background: "rgba(255,255,255,0.1)",
-                    borderRadius: "20px",
-                    p: 1,
-                    backdropFilter: "blur(10px)",
-                    border: "1px solid rgba(255,255,255,0.2)",
-                  }}
-                >
-                  <Typography
-                    variant="caption"
+                <Stack direction="row" spacing={1}>
+                  <Button
+                    variant="outlined"
+                    startIcon={<LoginIcon />}
+                    onClick={handleLogin}
                     sx={{
                       color: "light.main",
-                      mr: 1,
-                      fontWeight: 500,
-                      opacity: 0.8,
+                      borderColor: "rgba(255,255,255,0.3)",
+                      borderRadius: "25px",
+                      px: 3,
+                      py: 1,
+                      textTransform: "none",
+                      fontWeight: 600,
+                      fontSize: "0.9rem",
+                      backdropFilter: "blur(10px)",
+                      background: "rgba(255,255,255,0.05)",
+                      transition: "all 0.3s ease",
+                      "&:hover": {
+                        borderColor: "#2196F3",
+                        background: "rgba(33, 150, 243, 0.1)",
+                        // transform: "translateY(-2px)",
+                        boxShadow: "0 8px 25px rgba(33, 150, 243, 0.2)",
+                      },
                     }}
                   >
-                    Theme:
-                  </Typography>
-                  <Stack direction="row" spacing={0.5}>
-                    {themes.map((themeItem, index) => (
-                      <Box
-                        key={index}
-                        sx={{
-                          position: "relative",
-                          cursor: "pointer",
-                        }}
-                        onClick={() => setTheme(themeItem.theme)}
-                      >
-                        <CircleIcon
-                          sx={{
-                            color: themeItem.color,
-                            fontSize: "1.2rem",
-                            filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.3))",
-                            transition: "all 0.3s ease",
-                            "&:hover": {
-                              transform: "scale(1.2)",
-                              filter: "drop-shadow(0 4px 8px rgba(0,0,0,0.4))",
-                            },
-                          }}
-                        />
-                      </Box>
-                    ))}
-                  </Stack>
-                </Box>
-              )}
-
-              {/* Mobile Theme Button */}
-              {isMobile && (
-                <IconButton
-                  onClick={handleThemeMenuOpen}
-                  sx={{
-                    color: "light.main",
-                    background: "rgba(255,255,255,0.1)",
-                    backdropFilter: "blur(10px)",
-                    border: "1px solid rgba(255,255,255,0.2)",
-                    "&:hover": {
-                      background: "rgba(255,255,255,0.2)",
-                    },
-                  }}
-                >
-                  <PaletteIcon />
-                </IconButton>
+                    Login
+                  </Button>
+                  <Button
+                    variant="contained"
+                    startIcon={<PersonAddIcon />}
+                    onClick={handleSignup}
+                    sx={{
+                      background: "linear-gradient(45deg, #2196F3, #21CBF3)",
+                      borderRadius: "25px",
+                      px: 3,
+                      py: 1,
+                      textTransform: "none",
+                      fontWeight: 600,
+                      fontSize: "0.9rem",
+                      boxShadow: "0 4px 20px rgba(33, 150, 243, 0.3)",
+                      transition: "all 0.3s ease",
+                      "&:hover": {
+                        background: "linear-gradient(45deg, #1976D2, #2196F3)",
+                        // transform: "translateY(-2px)",
+                        boxShadow: "0 8px 25px rgba(33, 150, 243, 0.4)",
+                      },
+                    }}
+                  >
+                    Register
+                  </Button>
+                </Stack>
               )}
 
               {/* Mobile Menu Button */}
@@ -274,7 +241,6 @@ function Navbar() {
                     background: "rgba(255,255,255,0.1)",
                     backdropFilter: "blur(10px)",
                     border: "1px solid rgba(255,255,255,0.2)",
-                    ml: 1,
                     "&:hover": {
                       background: "rgba(255,255,255,0.2)",
                     },
@@ -288,37 +254,6 @@ function Navbar() {
         </Container>
       </AppBar>
 
-      {/* Mobile Theme Menu */}
-      <Menu
-        anchorEl={themeMenuAnchor}
-        open={Boolean(themeMenuAnchor)}
-        onClose={handleThemeMenuClose}
-        PaperProps={{
-          sx: {
-            background: "rgba(255,255,255,0.1)",
-            backdropFilter: "blur(20px)",
-            border: "1px solid rgba(255,255,255,0.2)",
-            borderRadius: "12px",
-          },
-        }}
-      >
-        {themes.map((themeItem, index) => (
-          <MenuItem
-            key={index}
-            onClick={() => handleThemeChange(themeItem.theme)}
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              gap: 1,
-              color: "light.main",
-            }}
-          >
-            <CircleIcon sx={{ color: themeItem.color, fontSize: "1.2rem" }} />
-            {themeItem.name}
-          </MenuItem>
-        ))}
-      </Menu>
-
       {/* Mobile Navigation Drawer */}
       <Drawer
         anchor="right"
@@ -326,7 +261,7 @@ function Navbar() {
         onClose={handleMobileMenuToggle}
         PaperProps={{
           sx: {
-            width: 280,
+            width: 300,
             background:
               "linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%)",
             backdropFilter: "blur(20px)",
@@ -334,19 +269,21 @@ function Navbar() {
           },
         }}
       >
-        <Box sx={{ p: 2 }}>
+        <Box sx={{ p: 3 }}>
           <Typography
             variant="h6"
             sx={{
               color: "light.main",
               fontWeight: 700,
-              mb: 2,
+              mb: 3,
               textAlign: "center",
             }}
           >
             Navigation
           </Typography>
-          <List>
+
+          {/* Navigation Links */}
+          <List sx={{ mb: 2 }}>
             {navigationItems.map((item) => (
               <ListItem key={item.label} disablePadding>
                 <ListItemButton
@@ -372,6 +309,70 @@ function Navbar() {
               </ListItem>
             ))}
           </List>
+
+          {/* Mobile Auth Buttons */}
+          <Box sx={{ mt: 3 }}>
+            <Typography
+              variant="subtitle2"
+              sx={{
+                color: "light.main",
+                opacity: 0.7,
+                mb: 2,
+                textAlign: "center",
+                textTransform: "uppercase",
+                letterSpacing: "1px",
+                fontSize: "0.75rem",
+              }}
+            >
+              Account
+            </Typography>
+            <Stack spacing={2}>
+              <Button
+                variant="outlined"
+                fullWidth
+                startIcon={<LoginIcon />}
+                onClick={handleLogin}
+                sx={{
+                  color: "light.main",
+                  borderColor: "rgba(255,255,255,0.3)",
+                  borderRadius: "12px",
+                  py: 1.5,
+                  textTransform: "none",
+                  fontWeight: 600,
+                  fontSize: "1rem",
+                  backdropFilter: "blur(10px)",
+                  background: "rgba(255,255,255,0.05)",
+                  "&:hover": {
+                    borderColor: "#2196F3",
+                    background: "rgba(33, 150, 243, 0.1)",
+                  },
+                }}
+              >
+                Login
+              </Button>
+              <Button
+                variant="contained"
+                fullWidth
+                startIcon={<PersonAddIcon />}
+                onClick={handleSignup}
+                sx={{
+                  background: "linear-gradient(45deg, #2196F3, #21CBF3)",
+                  borderRadius: "12px",
+                  py: 1.5,
+                  textTransform: "none",
+                  fontWeight: 600,
+                  fontSize: "1rem",
+                  boxShadow: "0 4px 20px rgba(33, 150, 243, 0.3)",
+                  "&:hover": {
+                    background: "linear-gradient(45deg, #1976D2, #2196F3)",
+                    boxShadow: "0 6px 25px rgba(33, 150, 243, 0.4)",
+                  },
+                }}
+              >
+                Sign Up
+              </Button>
+            </Stack>
+          </Box>
         </Box>
       </Drawer>
     </>

@@ -1,8 +1,8 @@
-# CodeBox
+# CodeKaro
 
 > API is still under early stages of development, so feel free to contribute in the project.
 
-### Introducing the new CodeBox API
+### Introducing the new CodeKaro API
 
 An API which executes codes
 
@@ -10,7 +10,7 @@ An API which executes codes
 
 ## Info
 
-This version is not scaled, you can access the scaled version here - "https://github.com/kushagra-goyal-14/CodeBox"
+This version is not scaled, you can access the scaled version here - "https://github.com/kushagra-goyal-14/CodeKaro"
 
 ### Execute Code and fetch output
 

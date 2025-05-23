@@ -37,7 +37,7 @@ function Home() {
   return (
     <Box
       sx={{
-        minHeight: "92vh",
+        height: "100vh",
         backgroundColor: "background.default",
         background: `
           radial-gradient(circle at 20% 80%, rgba(33, 150, 243, 0.1) 0%, transparent 50%),
@@ -46,6 +46,8 @@ function Home() {
         `,
         position: "relative",
         overflow: "hidden",
+        paddingLeft: 6,
+        paddingRight: 6,
       }}
     >
       {/* Animated background elements */}
@@ -119,7 +121,7 @@ function Home() {
                 <Typography
                   variant="h1"
                   sx={{
-                    fontSize: { xs: "3rem", md: "4.5rem", lg: "5rem" },
+                    fontSize: { xs: "2rem", md: "3rem", lg: "4rem" },
                     fontWeight: 800,
                     fontFamily: "Poppins, sans-serif",
                     background:
@@ -157,7 +159,7 @@ function Home() {
                 variant="h4"
                 sx={{
                   color: "light.main",
-                  fontSize: { xs: "1.5rem", md: "2rem", lg: "2.5rem" },
+                  fontSize: { xs: "1rem", md: "1.5rem", lg: "2rem" },
                   fontWeight: 600,
                   fontFamily: "Poppins, sans-serif",
                   lineHeight: 1.3,
@@ -220,7 +222,7 @@ function Home() {
                   endIcon={<ArrowForwardIcon />}
                   onClick={() => navigate("/editor")}
                   sx={{
-                    fontSize: { xs: "1.2rem", md: "1.4rem" },
+                    fontSize: { xs: "1.2rem", md: "1rem" },
                     fontWeight: 700,
                     fontFamily: "Poppins, sans-serif",
                     px: 4,
@@ -313,7 +315,7 @@ function Home() {
                 }}
               >
                 <img
-                  alt="CodeBox Editor Interface"
+                  alt="CodeKaro Editor Interface"
                   src={IMG}
                   style={{
                     width: "100%",
