@@ -266,7 +266,7 @@ console.log(\`Current time: \${currentTime}\`);`,
             <Typography
               variant="h6"
               sx={{
-                color: "text.primary",
+                color: "white",
                 fontFamily: "Poppins, sans-serif",
                 fontWeight: 600,
                 mb: 1,
@@ -355,7 +355,7 @@ console.log(\`Current time: \${currentTime}\`);`,
                 <Typography
                   variant="subtitle1"
                   sx={{
-                    color: "text.primary",
+                    color: "white",
                     fontFamily: "Poppins, sans-serif",
                     fontWeight: 600,
                     fontSize: "1rem",
@@ -373,6 +373,7 @@ console.log(\`Current time: \${currentTime}\`);`,
                   fontWeight: 600,
                   fontSize: "0.75rem",
                   height: 28,
+                  padding: "10px",
                 }}
               />
             </Box>
@@ -459,7 +460,7 @@ console.log(\`Current time: \${currentTime}\`);`,
                   fullWidth={isMobile}
                   sx={{
                     minWidth: isMobile ? "auto" : 120,
-                    color: "text.primary",
+                    color: "white",
                     backgroundColor: "rgba(0,0,0,0.2)",
                     borderRadius: "8px",
                     fontSize: "0.875rem",
@@ -485,7 +486,7 @@ console.log(\`Current time: \${currentTime}\`);`,
                         <Box sx={{ color: language.color, fontSize: "1rem" }}>
                           {language.icon}
                         </Box>
-                        <span style={{ fontSize: "0.875rem" }}>
+                        <span style={{ fontSize: "0.875rem", color: "white" }}>
                           {language.label}
                         </span>
                       </Box>
@@ -517,7 +518,7 @@ console.log(\`Current time: \${currentTime}\`);`,
                       minWidth: "auto",
                       "&:hover": {
                         background: "linear-gradient(135deg, #1976D2, #2196F3)",
-                        transform: "translateY(-1px)",
+                        // transform: "translateY(-1px)",
                         boxShadow: "0 4px 12px rgba(33, 150, 243, 0.3)",
                       },
                       "&:disabled": {
@@ -535,8 +536,9 @@ console.log(\`Current time: \${currentTime}\`);`,
                       onClick={handleClick}
                       size="small"
                       sx={{
-                        color: "text.primary",
+                        color: "white",
                         backgroundColor: "rgba(255,255,255,0.08)",
+                        width: "40px",
                         "&:hover": {
                           backgroundColor: "rgba(255,255,255,0.15)",
                         },
@@ -563,14 +565,14 @@ console.log(\`Current time: \${currentTime}\`);`,
                 >
                   <MenuItem
                     onClick={handleCopyCode}
-                    sx={{ fontSize: "0.875rem", py: 1 }}
+                    sx={{ fontSize: "0.875rem", py: 1, color: "white" }}
                   >
                     <ContentCopyIcon sx={{ mr: 1, fontSize: 16 }} />
                     Copy Code
                   </MenuItem>
                   <MenuItem
                     onClick={handleDownloadCode}
-                    sx={{ fontSize: "0.875rem", py: 1 }}
+                    sx={{ fontSize: "0.875rem", py: 1, color: "white" }}
                   >
                     <DownloadIcon sx={{ mr: 1, fontSize: 16 }} />
                     Download
@@ -592,7 +594,7 @@ console.log(\`Current time: \${currentTime}\`);`,
                   <Typography
                     variant="caption"
                     sx={{
-                      color: "text.secondary",
+                      color: "white",
                       fontSize: "0.75rem",
                       fontWeight: 500,
                     }}
@@ -626,7 +628,7 @@ console.log(\`Current time: \${currentTime}\`);`,
                 <Typography
                   variant="subtitle2"
                   sx={{
-                    color: "text.primary",
+                    color: "white",
                     fontFamily: "Poppins, sans-serif",
                     fontWeight: 600,
                     fontSize: "0.9rem",
@@ -663,7 +665,7 @@ console.log(\`Current time: \${currentTime}\`);`,
                     },
                   },
                   "& .MuiInputBase-input": {
-                    color: "text.primary",
+                    color: "white",
                     padding: "12px",
                     "&::placeholder": {
                       opacity: 0.6,
@@ -696,7 +698,7 @@ console.log(\`Current time: \${currentTime}\`);`,
                 <Typography
                   variant="subtitle2"
                   sx={{
-                    color: "text.primary",
+                    color: "white",
                     fontFamily: "Poppins, sans-serif",
                     fontWeight: 600,
                     fontSize: "0.9rem",
